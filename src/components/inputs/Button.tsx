@@ -31,13 +31,13 @@ const Button = React.forwardRef(
   ) => {
     const classNames = useClassNames(() => {
       const base =
-        "inline-flex items-center justify-center font-medium shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:filter disabled:contrast-75";
+        "inline-flex items-center justify-center font-medium border-2 shadow-lg transition focus:outline-none focus:ring-2  disabled:cursor-not-allowed disabled:filter disabled:contrast-75";
 
       const themes = {
         primary:
-          "dark:text-black bg-emerald-300 dark:bg-emerald-400 hover:bg-emerald-200 focus:bg-emerald-200 dark:hover:bg-emerald-500 dark:focus:bg-emerald-500  focus:ring-emerald-500",
+          "bg-emerald-300 hover:bg-emerald-200 focus:bg-emerald-200 focus:ring-emerald-500 border-emerald-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:bg-purple-700 dark:focus:ring-purple-500 dark:border-purple-800",
         secondary:
-          "dark:text-black bg-yellow-300 dark:bg-yellow-400 hover:bg-yellow-200 focus:bg-yellow-200 dark:hover:bg-yellow-500 dark:focus:bg-yellow-500  focus:ring-yellow-500",
+          "dark:text-black bg-yellow-300 dark:bg-yellow-400 hover:bg-yellow-200 focus:bg-yellow-200 dark:hover:bg-yellow-500 dark:focus:bg-yellow-500  focus:ring-yellow-500 border-yellow-300",
         ghost:
           "bg-transparent hover:bg-slate-100 hover:bg-opacity-30 focus:bg-slate-100 shadow-none focus:bg-opacity-30 focus:ring-slate-500",
       };
@@ -55,12 +55,13 @@ const Button = React.forwardRef(
       const sizeClass = sizes[size];
       const outlineClass = outline ? "bg-transparent hover:bg-transparent border-2" : "";
 
-      const borderlessClass = borderless
-        ? "border-transparent hover:border-transparent shadow-none"
-        : "";
+      const borderlessClass =
+        borderless || theme === "ghost"
+          ? "border-transparent hover:border-transparent shadow-none"
+          : "";
 
       return [base, themeClass, sizeClass, roundClass, outlineClass, borderlessClass, className];
-    }, [size, round, outline, className, borderless]);
+    }, [size, round, theme, outline, className, borderless]);
 
     return React.createElement(as, {
       ref,
