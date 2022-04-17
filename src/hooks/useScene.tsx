@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import * as THREE from "three";
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function useScene(
   ref: React.RefObject<any>,
   fn: (scene: THREE.Scene, camera?: THREE.Camera, renderer?: THREE.Renderer) => void
 ) {
-  useEffect(() => {
+  const createScene = useCallback(async () => {
     if (!ref.current) return;
+    if (typeof window === undefined) return;
+
+    await sleep(10);
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -18,11 +23,7 @@ export default function useScene(
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     // set renderer to ref size
-    const { width, height } = ref.current.getBoundingClientRect();
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    
+
     // remove all children
     while (ref.current.firstChild) {
       ref.current.removeChild(ref.current.firstChild);
@@ -31,6 +32,11 @@ export default function useScene(
     ref.current.appendChild(renderer.domElement);
 
     fn(scene, camera, renderer);
+
+    const { width, height } = ref.current.getBoundingClientRect();
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 
     // as window resizes, update renderer size
     window.addEventListener("resize", () => {
@@ -43,5 +49,9 @@ export default function useScene(
     return () => {
       window.removeEventListener("resize", () => {});
     };
-  }, [ref]);
+  }, [ref, fn]);
+
+  useEffect(() => {
+    createScene();
+  }, [createScene]);
 }

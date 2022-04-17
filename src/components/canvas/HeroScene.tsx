@@ -14,8 +14,8 @@ export default function HeroScene({}: Props) {
     const initialPosition = new THREE.Vector3(0, 1, 0);
     const base = new THREE.DodecahedronBufferGeometry(1, 2);
     const lineGeometry = new THREE.WireframeGeometry(base.clone());
-    const lineScale = 1.2;
-    lineGeometry.scale(lineScale, lineScale, lineScale);
+    const initialLineScale = 1.1;
+    lineGeometry.scale(initialLineScale, initialLineScale, initialLineScale);
 
     const linesMesh = new THREE.LineSegments(lineGeometry);
     linesMesh.material.depthTest = true;
@@ -40,6 +40,11 @@ export default function HeroScene({}: Props) {
 
     let cursorPosition = new THREE.Vector3();
 
+    let time = 0;
+
+    let boundA = 1.2;
+    let boundB = 1.3;
+
     const animate = () => {
       requestAnimationFrame(animate);
 
@@ -53,10 +58,15 @@ export default function HeroScene({}: Props) {
       linesMesh.rotation.x += speed;
       linesMesh.rotation.y += speed;
 
+      // bounce the scale of the linesMesh between 1.1 and 1.3
+      const scale = Math.sin(time * 0.5) * (boundB - boundA) + boundA + 0.2;
+      linesMesh.scale.set(scale, scale, scale);
+
       linesMesh.position.x = initialPosition.x;
       linesMesh.position.y = initialPosition.y;
       linesMesh.position.z = initialPosition.z;
 
+      time += 0.01;
       composer.render();
     };
 

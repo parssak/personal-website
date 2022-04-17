@@ -35,7 +35,7 @@ const Button = React.forwardRef(
 
       const themes = {
         primary:
-          "bg-emerald-300 hover:bg-emerald-200 focus:bg-emerald-200 focus:ring-emerald-500 border-emerald-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:bg-purple-700 dark:focus:ring-purple-500 dark:border-purple-800",
+          "bg-emerald-300 hover:bg-emerald-200 focus:bg-emerald-200 focus:ring-emerald-500 border-emerald-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:bg-purple-700 dark:focus:ring-purple-500 dark:border-purple-600",
         secondary:
           "dark:text-black bg-yellow-300 dark:bg-yellow-400 hover:bg-yellow-200 focus:bg-yellow-200 dark:hover:bg-yellow-500 dark:focus:bg-yellow-500  focus:ring-yellow-500 border-yellow-300",
         ghost:

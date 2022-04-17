@@ -6,13 +6,13 @@ export default function Home() {
   return (
     <>
       <main className="container min-h-screen grid lg:items-center overflow-hidden">
-        <div className="absolute -top-24 right-0 left-0 h-full">
+        <div className="absolute -top-0 right-0 left-0 h-full">
           <HeroScene />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-100 via-gray-100 dark:from-black dark:via-black"></div>
         </div>
         <div className="pt-96 text-center lg:text-left relative">
           <Text variant="h1">Hi. I'm Parssa</Text>
-          <Text className="lg:ml-0.5" variant="h2">
+          <Text className="lg:ml-0.5" variant="caption">
             Frontend Developer @ Fig
           </Text>
 
@@ -31,6 +31,23 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      <section className="container py-24">
+        <Text variant="h2" className="mb-4">
+          What I do
+        </Text>
+        <div className="space-y-4 max-w-xl">
+          <Text variant="body1">
+            I'm a frontend developer with a passion for building tools and products that improve
+            people's lives.
+          </Text>
+          <Text variant="body1">
+            I have experience in building web applications in Next.js and React, commercial websites
+            with Vue.js, and building professional component libraries in React with TypeScript.
+          </Text>
+        </div>
+      </section>
+      
     </>
   );
 }
