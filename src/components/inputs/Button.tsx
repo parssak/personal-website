@@ -1,7 +1,6 @@
 import React from "react";
 import { useClassNames } from "hooks/useClassNames";
 
-// export type ButtonTheme = Theme | "white";
 type Theme = "primary" | "secondary" | "ghost";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Exotic {

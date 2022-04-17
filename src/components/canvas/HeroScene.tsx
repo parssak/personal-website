@@ -12,8 +12,8 @@ export default function HeroScene({}: Props) {
 
   useScene(ref, (scene, camera, renderer) => {
     const initialPosition = new THREE.Vector3(0, 1, 0);
-    const base = new THREE.DodecahedronBufferGeometry(1, 2);
-    const lineGeometry = new THREE.WireframeGeometry(base.clone());
+    const base = new THREE.DodecahedronBufferGeometry(1, 0);
+    const lineGeometry = new THREE.WireframeGeometry(new THREE.DodecahedronBufferGeometry(1, 1));
     const initialLineScale = 1.1;
     lineGeometry.scale(initialLineScale, initialLineScale, initialLineScale);
 
@@ -34,7 +34,7 @@ export default function HeroScene({}: Props) {
     composer.addPass(renderPass);
 
     scene.add(mesh);
-    camera.position.z = 3;
+    camera.position.z = 3.5;
 
     const speed = 0.001;
 
